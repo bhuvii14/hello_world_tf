@@ -1,0 +1,37 @@
+[
+    {
+      "name": "${ container_name }",
+      "image": "${ image_name }",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": ${ container_port },
+          "hostPort": ${ host_port }
+        }
+      ],
+      "secrets": [
+         
+        {
+          "name": "environemnt",
+          "valueFrom": "arn:aws:secretsmanager:ap-south-1:394597785857:secret:demo-ap-secrets-DXAORk:environemnt::"
+      },
+      {
+        "name": "port",
+        "valueFrom": "arn:aws:secretsmanager:ap-south-1:394597785857:secret:demo-ap-secrets-DXAORk:port::"
+    }
+
+        
+        
+      ],
+      
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "${ ProjectName }-${ servicename }-${ environment }",
+          "awslogs-region": "${ region }",
+          "awslogs-stream-prefix": "${ container_name }-log"
+        }
+      }
+    }
+  ]
+  
